@@ -1,3 +1,4 @@
+import matplotlib.pyplot as pyplot
 import math
 import random
 import numpy as np
@@ -100,22 +101,30 @@ def kmeans(k, vectors):
 
 			if nb_iters > 10:
 				repeat = False
-			
+	for i in range(0,n):
+		print vectors[i][0], "\t", vectors[i][1], "\t", assignments[i], "\t", centroids[assignments[i]][0], "\t", centroids[assignments[i]][1]
+
+
 data = [
-      {'company': 'Microsoft' , 'size': 91259, 'revenue': 60420},
-      {'company': 'IBM' , 'size': 400000, 'revenue': 98787},
+      {'company': 'Microsoft' , 'size': 9259, 'revenue': 6420},
+      {'company': 'IBM' , 'size': 40000, 'revenue': 9878},
       {'company': 'Skype' , 'size': 700, 'revenue': 716},
-      {'company': 'SAP' , 'size': 48000, 'revenue': 11567},
+	{'company': 'SAP' , 'size': 48000, 'revenue': 11567},
       {'company': 'Yahoo!' , 'size': 14000 , 'revenue': 6426 },
-      {'company': 'eBay' , 'size': 15000, 'revenue': 8700},
-      {'company': 'test' , 'size': 105000, 'revenue': 8700},
-      {'company': 'test1' , 'size': 500, 'revenue': 800},
-   ] ;
+      {'company': 'eBay' , 'size': 15000, 'revenue': 8700}
+	];
 
 labels = []
 vectors = []
+x = []
+y = []
 for i in range(0, len(data)):
 	labels.append(data[i]['company'])
 	vectors.append([data[i]['size'] , data[i]['revenue']])
+	x.append(data[i]['size'])
+	y.append(data[i]['revenue'])
 
-kmeans(4, vectors)
+#print x
+#pyplot.scatter(x,y)
+#pyplot.savefig('test.png')
+kmeans(3, vectors)
