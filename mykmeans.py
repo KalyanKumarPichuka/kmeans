@@ -84,10 +84,12 @@ def kmeans(k, vectors):
 				if newcentroids[cluster]==None:
 					newcentroids[cluster] = vectors[i]
 				else:
-					newcentroids[cluster] = addVectors(newcentroids[cluster], vectors[i])
+					newcentroids[cluster] = addVectors(newcentroids[cluster],
+					vectors[i])
 
 			for i in range(0,k):
-				newcentroids[i] = multiplybyvalue (float(1) / float(clustersizes[i]), newcentroids[i])
+				newcentroids[i] = multiplybyvalue (
+				float(1) / float(clustersizes[i]), newcentroids[i])
 			repeat = False
 			for i in range(0,k):
 				if centroids[i] != newcentroids[i]:
@@ -98,7 +100,7 @@ def kmeans(k, vectors):
 
 			if nb_iters > 10:
 				repeat = False
-
+			
 data = [
       {'company': 'Microsoft' , 'size': 91259, 'revenue': 60420},
       {'company': 'IBM' , 'size': 400000, 'revenue': 98787},
@@ -116,5 +118,4 @@ for i in range(0, len(data)):
 	labels.append(data[i]['company'])
 	vectors.append([data[i]['size'] , data[i]['revenue']])
 
-#print addVectors([48000, 11567],[91259, 60420])
 kmeans(4, vectors)
