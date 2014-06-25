@@ -62,15 +62,13 @@ def kmeans(k, vectors):
 		clustersizes.append(0)
 	for i in range(0,n):
 		assignments.append(0)
-	centroids = [[48000, 11567],[91259, 60420],[14000, 6426],[700, 716]]
-	#centroids = getRandomVectors(k, vectors)
+	centroids = getRandomVectors(k, vectors)
    	while(repeat):
    		for i in range(0, n):
    			mindist = np.inf
    	 		vector = vectors[i]
    	 		for j in range(0, k):
    	 			dist = euclidianDistance(centroids[j], vector)
-   	 			#print vector, "->", dist, "<-", centroids[j]
    	 			if dist < mindist:
    	 				mindist = dist
    	 				best = j
@@ -78,8 +76,6 @@ def kmeans(k, vectors):
    	 		assignments[i] = best
 
    	 	for i in range(0,n):
-   	 		#print i, ":", vectors[i], ":", centroids[assignments[i]], ":", clustersizes[assignments[i]]
-
 			newcentroids = []
 			for i in range(0,n):
 				newcentroids.append(None)
@@ -87,15 +83,11 @@ def kmeans(k, vectors):
 				cluster = assignments[i]
 				if newcentroids[cluster]==None:
 					newcentroids[cluster] = vectors[i]
-					#print newcentroids[cluster], ":", clustersizes[cluster]
 				else:
 					newcentroids[cluster] = addVectors(newcentroids[cluster], vectors[i])
-					#print 'New', newcentroids[cluster], ":", clustersizes[cluster]
 
 			for i in range(0,k):
 				newcentroids[i] = multiplybyvalue (float(1) / float(clustersizes[i]), newcentroids[i])
-				print centroids[i], ":", newcentroids[i]
-			print "-----------------------------"
 			repeat = False
 			for i in range(0,k):
 				if centroids[i] != newcentroids[i]:
